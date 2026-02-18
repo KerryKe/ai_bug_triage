@@ -3,7 +3,6 @@
 
 generator client {
     provider = "prisma-client-js"
-    output   = "../generated/prisma"
 }
 
 datasource db {
@@ -11,11 +10,14 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    @@index([name])
+model Bug {
+    id          Int      @id @default(autoincrement())
+    title       String
+    description String
+    severity    String?  // S0-S3
+    area        String?  // frontend, backend, infra, data
+    status      String   @default("OPEN")
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    aiAnalysis  String? 
 }
