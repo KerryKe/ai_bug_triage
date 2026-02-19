@@ -1,29 +1,41 @@
-# Create T3 App
-
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-## What's next? How do I make an app with this?
+## Getting Started
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+Follow these steps to set up and run the AI Bug Triage Board on a new machine.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+### Prerequisites
+* Ensure you have [Node.js](https://nodejs.org/) (v18+ recommended) installed.
+* Ensure you have a valid Google Gemini API Key (for other AIP keys, please modify the model in ~/src/server/ai.ts).
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+### 1. Install Dependencies
+After pulling the repository, install all required packages. 
 
-## Learn More
+```
+npm install
+```
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+### 2. Set Up Environment Variables
+Create a new file named `.env` in the root directory of the project. Add your database connection string and your API key:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+```
+# Local SQLite Database connection
+DATABASE_URL="file:./db.sqlite"
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+# Gemini API Key for AI Triage, Similarity Scoring, and Chat Agent
+GEMINI_API_KEY="your_actual_api_key_here"
+```
 
-## How do I deploy this?
+### 3. Initialize the Database (Prisma)
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+```
+npx prisma generate
+npx prisma db push
+```
+
+### 4. Run the Application
+```
+npm run dev
+```
+
+The application will now be running at `http://localhost:3000`.
